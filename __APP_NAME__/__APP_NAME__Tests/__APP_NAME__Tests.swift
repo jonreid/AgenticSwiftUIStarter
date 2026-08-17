@@ -1,5 +1,3 @@
-//
-
 import Testing
 @testable import __APP_NAME__
 
