@@ -1,4 +1,4 @@
-@testable import __APP_NAME__
+@testable import AppNamePlaceholder
 import Testing
 
 final class PlaceholderTests: @unchecked Sendable {

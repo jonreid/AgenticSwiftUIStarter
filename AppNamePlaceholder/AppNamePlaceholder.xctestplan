@@ -11,17 +11,17 @@
   "defaultOptions" : {
     "performanceAntipatternCheckerEnabled" : true,
     "targetForVariableExpansion" : {
-      "containerPath" : "container:__APP_NAME__.xcodeproj",
+      "containerPath" : "container:AppNamePlaceholder.xcodeproj",
       "identifier" : "0F9C047B3032981400EB57C0",
-      "name" : "__APP_NAME__"
+      "name" : "AppNamePlaceholder"
     }
   },
   "testTargets" : [
     {
       "target" : {
-        "containerPath" : "container:__APP_NAME__.xcodeproj",
+        "containerPath" : "container:AppNamePlaceholder.xcodeproj",
         "identifier" : "0F9C04883032981500EB57C0",
-        "name" : "__APP_NAME__Tests"
+        "name" : "AppNamePlaceholderTests"
       }
     }
   ],

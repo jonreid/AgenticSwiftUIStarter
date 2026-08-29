@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F9C047B3032981400EB57C0"
-               BuildableName = "__APP_NAME__.app"
-               BlueprintName = "__APP_NAME__"
-               ReferencedContainer = "container:__APP_NAME__.xcodeproj">
+               BuildableName = "AppNamePlaceholder.app"
+               BlueprintName = "AppNamePlaceholder"
+               ReferencedContainer = "container:AppNamePlaceholder.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:__APP_NAME__.xctestplan"
+            reference = "container:AppNamePlaceholder.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -40,9 +40,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F9C04883032981500EB57C0"
-               BuildableName = "__APP_NAME__Tests.xctest"
-               BlueprintName = "__APP_NAME__Tests"
-               ReferencedContainer = "container:__APP_NAME__.xcodeproj">
+               BuildableName = "AppNamePlaceholderTests.xctest"
+               BlueprintName = "AppNamePlaceholderTests"
+               ReferencedContainer = "container:AppNamePlaceholder.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -51,9 +51,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0F9C04923032981500EB57C0"
-               BuildableName = "__APP_NAME__UITests.xctest"
-               BlueprintName = "__APP_NAME__UITests"
-               ReferencedContainer = "container:__APP_NAME__.xcodeproj">
+               BuildableName = "AppNamePlaceholderUITests.xctest"
+               BlueprintName = "AppNamePlaceholderUITests"
+               ReferencedContainer = "container:AppNamePlaceholder.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -74,9 +74,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F9C047B3032981400EB57C0"
-            BuildableName = "__APP_NAME__.app"
-            BlueprintName = "__APP_NAME__"
-            ReferencedContainer = "container:__APP_NAME__.xcodeproj">
+            BuildableName = "AppNamePlaceholder.app"
+            BlueprintName = "AppNamePlaceholder"
+            ReferencedContainer = "container:AppNamePlaceholder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -91,9 +91,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0F9C047B3032981400EB57C0"
-            BuildableName = "__APP_NAME__.app"
-            BlueprintName = "__APP_NAME__"
-            ReferencedContainer = "container:__APP_NAME__.xcodeproj">
+            BuildableName = "AppNamePlaceholder.app"
+            BlueprintName = "AppNamePlaceholder"
+            ReferencedContainer = "container:AppNamePlaceholder.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

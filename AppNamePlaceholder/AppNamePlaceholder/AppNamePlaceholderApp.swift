@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct __APP_NAME__App: App {
+struct AppNamePlaceholderApp: App {
     var body: some Scene {
         WindowGroup {
             if isProduction {
