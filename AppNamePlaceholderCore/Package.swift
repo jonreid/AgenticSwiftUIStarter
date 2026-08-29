@@ -3,26 +3,26 @@
 import PackageDescription
 
 let package = Package(
-    name: "__PACKAGE_NAME__",
+    name: "AppNamePlaceholderCore",
     platforms: [
         .macOS(.v15),
         .iOS(.v18),
     ],
     products: [
         .library(
-            name: "__PACKAGE_NAME__",
-            targets: ["__PACKAGE_NAME__"]
+            name: "AppNamePlaceholderCore",
+            targets: ["AppNamePlaceholderCore"]
         ),
     ],
     dependencies: [
     ],
     targets: [
         .target(
-            name: "__PACKAGE_NAME__"
+            name: "AppNamePlaceholderCore"
         ),
         .testTarget(
-            name: "__PACKAGE_NAME__Tests",
-            dependencies: ["__PACKAGE_NAME__"]
+            name: "AppNamePlaceholderCoreTests",
+            dependencies: ["AppNamePlaceholderCore"]
         ),
     ],
     swiftLanguageModes: [.v6]

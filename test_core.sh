@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-cd __PACKAGE_NAME__
+cd AppNamePlaceholderCore
 
 TMP_OUTPUT=$(mktemp)
 trap 'rm -f "$TMP_OUTPUT"' EXIT
@@ -9,8 +9,8 @@ trap 'rm -f "$TMP_OUTPUT"' EXIT
 run_tests() {
   if [[ "${1:-}" == "--strings" ]]; then
     swift build --build-tests
-    local bundle="$(swift build --show-bin-path)/__PACKAGE_NAME_____PACKAGE_NAME__.bundle"
-    xcrun xcstringstool compile Sources/__PACKAGE_NAME__/Resources/Localizable.xcstrings --output-directory "$bundle"
+    local bundle="$(swift build --show-bin-path)/AppNamePlaceholderCore_AppNamePlaceholderCore.bundle"
+    xcrun xcstringstool compile Sources/AppNamePlaceholderCore/Resources/Localizable.xcstrings --output-directory "$bundle"
     swift test --skip-build
   else
     swift test
