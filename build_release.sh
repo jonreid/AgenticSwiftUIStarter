@@ -2,6 +2,6 @@
 set -euo pipefail
 
 SCHEME='AppNamePlaceholder'
-DESTINATION='platform=iOS Simulator,OS=26.4.1,name=iPhone 17'
+DESTINATION='generic/platform=iOS Simulator'
 
 xcodebuild -configuration Release -scheme $SCHEME -sdk iphonesimulator -destination "$DESTINATION" -disableAutomaticPackageResolution CODE_SIGNING_ALLOWED='NO' | xcbeautify
