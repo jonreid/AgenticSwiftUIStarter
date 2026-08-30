@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F6883653043B109005A6A4A /* AppNamePlaceholderCore in Frameworks */ = {isa = PBXBuildFile; productRef = 0F6883643043B109005A6A4A /* AppNamePlaceholderCore */; };
+		0F6883683043B181005A6A4A /* ViewInspector in Frameworks */ = {isa = PBXBuildFile; productRef = 0F6883673043B181005A6A4A /* ViewInspector */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F6883683043B181005A6A4A /* ViewInspector in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +125,7 @@
 			);
 			name = AppNamePlaceholderTests;
 			packageProductDependencies = (
+				0F6883673043B181005A6A4A /* ViewInspector */,
 			);
 			productName = AppNamePlaceholderTests;
 			productReference = 0F9C04893032981500EB57C0 /* AppNamePlaceholderTests.xctest */;
@@ -158,6 +161,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				0F6883633043B109005A6A4A /* XCLocalSwiftPackageReference "AppNamePlaceholderCore" */,
+				0F6883663043B181005A6A4A /* XCRemoteSwiftPackageReference "ViewInspector" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 0F9C047D3032981400EB57C0 /* Products */;
@@ -419,10 +423,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		0F6883663043B181005A6A4A /* XCRemoteSwiftPackageReference "ViewInspector" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/ViewInspector.git";
+			requirement = {
+				branch = 0.10.4;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		0F6883643043B109005A6A4A /* AppNamePlaceholderCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppNamePlaceholderCore;
+		};
+		0F6883673043B181005A6A4A /* ViewInspector */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0F6883663043B181005A6A4A /* XCRemoteSwiftPackageReference "ViewInspector" */;
+			productName = ViewInspector;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
