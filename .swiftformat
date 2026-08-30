@@ -1,0 +1,2 @@
+--disable redundantThrows
+--exclude ThirdParty

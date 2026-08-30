@@ -1,0 +1,5 @@
+disabled_rules:
+  - file_length
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - type_body_length
