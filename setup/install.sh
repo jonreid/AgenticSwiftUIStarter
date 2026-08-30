@@ -24,3 +24,7 @@ set -euo pipefail
 EOF
 chmod +x "$hook"
 echo "Installed pre-commit hook."
+
+echo "Resolving Swift package dependencies..."
+( cd "$repo_root" && xcodebuild -resolvePackageDependencies >/dev/null )
+echo "Resolved Package.resolved (build_release.sh skips resolution)."
