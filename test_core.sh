@@ -1,6 +1,32 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+usage() {
+  cat >&2 <<'EOF'
+Usage: test_core.sh [--strings]
+
+Runs the AppNamePlaceholderCore test suite.
+
+  --strings   Compile Localizable.xcstrings into the test bundle before
+              running, so tests that resolve localized strings pass.
+              Without it, string resources are not built.
+  -h, --help  Show this help.
+EOF
+}
+
+case "${1:-}" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  --strings|"")
+    ;;
+  *)
+    usage
+    exit 1
+    ;;
+esac
+
 cd AppNamePlaceholderCore
 
 TMP_OUTPUT=$(mktemp)
