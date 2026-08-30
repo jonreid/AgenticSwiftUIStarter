@@ -1,0 +1,6 @@
+{
+  "reporters": ["console"],
+  "ignore": ["**/.git", "**/AppNamePlaceholderCore/.build/**"],
+  "gitignore": true,
+  "format": ["swift"]
+}
