@@ -3,14 +3,18 @@ set -euo pipefail
 
 usage() {
   cat >&2 <<'EOF'
-Usage: test_core.sh [--strings]
+Usage: test_core.sh [--strings | -h]
 
-Runs the AppNamePlaceholderCore test suite.
+Run the AppNamePlaceholderCore test suite. On success, prints only a
+one-line summary with the test count (keeps output small). On failure,
+prints the full build/test output followed by the failure reason.
 
-  --strings   Compile Localizable.xcstrings into the test bundle before
-              running, so tests that resolve localized strings pass.
-              Without it, string resources are not built.
-  -h, --help  Show this help.
+Options:
+  --strings   Compile Localizable.xcstrings and copy it into the test
+              bundle before running. Use this when tests assert on
+              localized strings; otherwise xcstringstool is skipped and
+              those lookups fall back to their keys.
+  -h, --help  Show this help and exit.
 EOF
 }
 
