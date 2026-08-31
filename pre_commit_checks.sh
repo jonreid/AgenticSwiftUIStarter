@@ -12,7 +12,6 @@ staged_files=$(git diff --cached --name-only)
 [[ -z "$staged_files" ]] && echo "Nothing staged to commit" && exit 1
 staged_swift=$(git diff --cached --name-only --diff-filter=d -- '*.swift' | grep -v '/ThirdParty/' || true)
 
-./build_release.sh
 if [[ -n "$staged_swift" ]]; then
     swiftlint lint --fix --force-exclude --quiet $staged_swift
     swiftformat $staged_swift
@@ -26,3 +25,5 @@ if [[ -n "$staged_swift" ]]; then
     swiftlint lint --force-exclude --quiet --strict $staged_swift
     ./cpd.sh
 fi
+./build_release.sh
+./test_core.sh
