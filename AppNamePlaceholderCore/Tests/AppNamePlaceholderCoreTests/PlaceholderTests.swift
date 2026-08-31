@@ -1,7 +1,7 @@
 @testable import AppNamePlaceholderCore
 import Testing
 
-final class PlaceholderTests: @unchecked Sendable {
+struct PlaceholderTests {
     @Test
     func success() async throws {
     }
