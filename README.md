@@ -17,7 +17,7 @@ Create a repo from this template. Then from the project root:
 
 `install.sh` does the following:
 
-- Uses Homebrew to install SwiftFormat, SwiftLint, and jscpd.
+- Uses Homebrew to install SwiftFormat, SwiftLint, jscpd, and cloc.
 - Installs a pre-commit hook that runs `./pre_commit_checks.sh`.
 - Does an initial build to resolve package dependencies so that per-commit builds can skip package resolution.
 
