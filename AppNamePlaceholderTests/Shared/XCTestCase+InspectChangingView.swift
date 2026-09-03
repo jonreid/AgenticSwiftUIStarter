@@ -53,6 +53,6 @@ extension XCTestCase {
         let rendered = sut.on(\.viewInspectorHook, file: file, line: line, perform: actionCapturingResult)
         ViewHosting.host(view: host(sut))
         defer { ViewHosting.expel() }
-        wait(for: [rendered], timeout: 0.4)
+        wait(for: [rendered], timeout: 0.1)
     }
 }
