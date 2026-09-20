@@ -5,15 +5,13 @@ usage() {
   cat >&2 <<'EOF'
 Usage: test_core.sh [--strings | -h]
 
-Run the AppNamePlaceholderCore test suite. On success, prints only a
-one-line summary with the test count (keeps output small). On failure,
-prints the full build/test output followed by the failure reason.
+Run the AppNamePlaceholderCore test suite. Output stays small on either success
+or failure.
 
 Options:
-  --strings   Compile Localizable.xcstrings and copy it into the test
-              bundle before running. Use this when tests assert on
-              localized strings; otherwise xcstringstool is skipped and
-              those lookups fall back to their keys.
+  --strings   Compile Localizable.xcstrings into the test bundle first.
+              Needed when tests assert on localized strings; without it,
+              lookups fall back to their keys instead of their values.
   -h, --help  Show this help and exit.
 EOF
 }
@@ -36,46 +34,93 @@ cd AppNamePlaceholderCore
 TMP_OUTPUT=$(mktemp)
 trap 'rm -f "$TMP_OUTPUT"' EXIT
 
-run_tests() {
+compile_strings_bundle() {
+  local bundle
+  bundle="$(swift build --show-bin-path)/AppNamePlaceholderCore_AppNamePlaceholderCore.bundle"
+  xcrun xcstringstool compile Sources/AppNamePlaceholderCore/Resources/Localizable.xcstrings --output-directory "$bundle"
+}
+
+build_and_test() {
   if [[ "${1:-}" == "--strings" ]]; then
     swift build --build-tests
-    local bundle="$(swift build --show-bin-path)/AppNamePlaceholderCore_AppNamePlaceholderCore.bundle"
-    xcrun xcstringstool compile Sources/AppNamePlaceholderCore/Resources/Localizable.xcstrings --output-directory "$bundle"
+    compile_strings_bundle
     swift test --skip-build
   else
     swift test
   fi
 }
 
-if run_tests "${1:-}" > "$TMP_OUTPUT" 2>&1; then
-  read -r XCTEST_COUNT SWIFT_TEST_COUNT <<< $(
-    awk '
-      /Executed [0-9]+ tests?/ && !xctest_counted {
-        xctest=$2
-        xctest_counted=1
-      }
-      /Test run with [0-9]+ tests?/ {
-        split($0, words, " ")
-        for (i = 1; i <= length(words); i++) {
-          if (words[i] == "with" && words[i+1] ~ /^[0-9]+$/) {
-            swift = words[i+1]
-            break
-          }
+drop_build_output() {
+  if grep -q '^Build complete!' "$TMP_OUTPUT"; then
+    awk 'NR==FNR { if (/^Build complete!/) last = FNR; next } FNR > last' "$TMP_OUTPUT" "$TMP_OUTPUT"
+  else
+    cat "$TMP_OUTPUT"
+  fi
+}
+
+count_tests() {
+  awk '
+    /Executed [0-9]+ tests?/ && !xctest_counted {
+      xctest=$2
+      xctest_counted=1
+    }
+    /Test run with [0-9]+ tests?/ {
+      split($0, words, " ")
+      for (i = 1; i <= length(words); i++) {
+        if (words[i] == "with" && words[i+1] ~ /^[0-9]+$/) {
+          swift = words[i+1]
+          break
         }
       }
-      END {
-        print xctest+0, swift+0
-      }
-    ' "$TMP_OUTPUT"
+    }
+    END {
+      print xctest+swift+0
+    }
+  ' "$TMP_OUTPUT"
+}
+
+report_passed_tests() {
+  echo "✅ All core tests passed: $(count_tests) tests."
+}
+
+print_relevant_output() {
+  local pattern
+  local -a noise_patterns grep_args
+  noise_patterns=(
+    'Suite [A-Z][A-Za-z0-9_]* started\.$'
+    'Test ".*" started\.$'
+    'Test case passing [0-9]+ arguments? .* started\.$'
+    'Test .* passed after [0-9.]+ seconds\.$'
+    'Suite [A-Z][A-Za-z0-9_]* passed after [0-9.]+ seconds\.$'
+    "^Test Suite '[A-Z][A-Za-z0-9_. ]*' started at .*\\.\$"
+    '^Test Case .* started\.$'
+    '^Test Case .* passed \([0-9.]+ seconds\)\.$'
+    '^[[:space:]]*Executed [0-9]+ tests?, with 0 failures \(0 unexpected\) in .*$'
+    "^Test Suite '[A-Z][A-Za-z0-9_. ]*' passed at .*\\.\$"
   )
-  TOTAL_TESTS=$((XCTEST_COUNT + SWIFT_TEST_COUNT))
-  echo "✅ All core tests passed: $TOTAL_TESTS tests."
-else
-  cat "$TMP_OUTPUT"
+  grep_args=()
+  for pattern in "${noise_patterns[@]}"; do
+    grep_args+=(-e "$pattern")
+  done
+  drop_build_output | grep -Ev "${grep_args[@]}" || true
+}
+
+failure_verdict() {
   if grep -q "Test run.*failed\|Test Suite.*failed\|recorded an issue" "$TMP_OUTPUT"; then
     echo "❌ Core tests failed."
   else
     echo "❌ Core build failed."
   fi
+}
+
+report_failure() {
+  print_relevant_output
+  failure_verdict
+}
+
+if build_and_test "${1:-}" > "$TMP_OUTPUT" 2>&1; then
+  report_passed_tests
+else
+  report_failure
   exit 1
 fi
