@@ -118,7 +118,20 @@ report_failure() {
   failure_verdict
 }
 
+has_warnings() {
+  grep -q "recorded a warning" "$TMP_OUTPUT"
+}
+
+report_warnings() {
+  print_relevant_output
+  echo "❌ Core tests recorded warnings. Under limited interop, a failing XCTest assertion is only a warning."
+}
+
 if build_and_test "${1:-}" > "$TMP_OUTPUT" 2>&1; then
+  if has_warnings; then
+    report_warnings
+    exit 1
+  fi
   report_passed_tests
 else
   report_failure
